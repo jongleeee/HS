@@ -104,6 +104,8 @@
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Request Sent!" message:@"please check your email" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
     [alertView show];
     
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    
 }
 
 - (IBAction)imagePressed:(id)sender {
@@ -131,6 +133,7 @@
         [self uploadImage];
     }
 
+    [self.navigationController popToRootViewControllerAnimated:YES];
 
 }
 
@@ -165,6 +168,7 @@
     {
         self.image = [info objectForKey:UIImagePickerControllerOriginalImage];
         
+        
         if (self.imagePicker.sourceType == UIImagePickerControllerSourceTypeCamera)
         {
             UIImageWriteToSavedPhotosAlbum(self.image, nil, nil, nil);
@@ -176,13 +180,48 @@
 
 - (void)uploadImage
 {
+    NSData *fileData;
+    NSString *fileName;
+    NSString *fileType;
+    
     if (self.image != nil)
     {
         UIImage *newImage = [self resizeImage:self.image toWidth:120.0f andHeight:131.0f];
+    
+        fileData = UIImagePNGRepresentation(newImage);
+        fileName = @"image.png";
+        fileType = @"image";
     }
     
     
-    [self viewWillAppear:YES];
+    PFFile *file = [PFFile fileWithName:fileName data:fileData];
+    [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error)
+        {
+            NSLog(@"Error: %@", error);
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"please try again" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+            [alertView show];
+        }
+        else
+        {
+            PFObject *profilePic = [PFObject objectWithClassName:@"UserPhoto"];
+            [profilePic setObject:file forKey:@"imageFile"];
+            [profilePic setObject:[PFUser currentUser] forKey:@"user"];
+            
+            [profilePic saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (error)
+                {
+                    NSLog(@"Error: %@", error);
+                    
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"please try again" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                    [alertView show];
+                }
+            }];
+        }
+        
+    }];
+    
 }
 
 
