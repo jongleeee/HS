@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>81A7ECBF-D8C5-495B-BFCD-CCB2E4E8982B</string>
+	<string>E49B3E47-BCF3-4086-AB9C-3A0B8B2844B8</string>
 	<key>IDESourceControlProjectName</key>
 	<string>HS</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>9547A7D5-D652-4E14-BD32-E54FB40DA6FC</key>
-		<string>https://github.com/heapstack/ios.git</string>
+		<key>B8469009-9B1A-489D-8CD4-D97284CFAF3C</key>
+		<string>ssh://github.com/jongleeee/HS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>HS.xcodeproj/project.xcworkspace</string>
+	<string>HS/HS.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>9547A7D5-D652-4E14-BD32-E54FB40DA6FC</key>
-		<string>../..</string>
+		<key>B8469009-9B1A-489D-8CD4-D97284CFAF3C</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/heapstack/ios.git</string>
+	<string>ssh://github.com/jongleeee/HS.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>9547A7D5-D652-4E14-BD32-E54FB40DA6FC</string>
+	<string>B8469009-9B1A-489D-8CD4-D97284CFAF3C</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>9547A7D5-D652-4E14-BD32-E54FB40DA6FC</string>
+			<string>B8469009-9B1A-489D-8CD4-D97284CFAF3C</string>
 			<key>IDESourceControlWCCName</key>
 			<string>HS</string>
 		</dict>

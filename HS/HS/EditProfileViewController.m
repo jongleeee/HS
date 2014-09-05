@@ -22,6 +22,10 @@
 
     self.currentUser = [PFUser currentUser];
     self.currentPicture.userInteractionEnabled = YES;
+    
+    self.imagePicker = [[UIImagePickerController alloc] init];
+    self.imagePicker.delegate = self;
+    self.imagePicker.allowsEditing = NO;
 
 }
 
@@ -118,12 +122,12 @@
     if (buttonIndex == 0)
     {
         [self takePhoto];
-        [self uploadImage];
+//        [self uploadImage];
     }
     else if (buttonIndex == 1)
     {
         [self getPhoto];
-        [self uploadImage];
+//        [self uploadImage];
     }
 
 
@@ -132,7 +136,24 @@
 
 
 #pragma mark - Upload Method
+- (void)takePhoto
+{
+   
+    self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    self.imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:self.imagePicker.sourceType];
+    
+    [self presentViewController:self.imagePicker animated:NO completion:nil];
+    
+    
+}
 
+- (void)getPhoto
+{
+    self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    self.imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:self.imagePicker.sourceType];
+    
+    [self presentViewController:self.imagePicker animated:NO completion:nil];
+}
 
 
 

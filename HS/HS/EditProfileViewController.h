@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
-@interface EditProfileViewController : UIViewController <UIActionSheetDelegate>
+@interface EditProfileViewController : UIViewController <UIActionSheetDelegate, UINavigationControllerDelegate ,UIImagePickerControllerDelegate>
+
 
 
 @property (strong, nonatomic) IBOutlet UILabel *currentUsername;
@@ -20,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *nameField;
 @property (strong, nonatomic) IBOutlet UIImageView *currentPicture;
 @property (strong, nonatomic) UIActionSheet *actionRequired;
+@property (strong, nonatomic) UIImagePickerController *imagePicker;
 
 @property (nonatomic, strong) PFUser *currentUser;
 

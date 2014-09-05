@@ -10,7 +10,6 @@
 #import <Parse/Parse.h>
 
 @interface EditMemberTableViewController : UITableViewController
-
 @property (nonatomic, strong) NSArray *allMembers;
 @property (nonatomic, strong) PFUser *currentUser;
 @property (nonatomic, strong) NSMutableArray *friends;
