@@ -114,6 +114,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSLog(@"%d", buttonIndex);
+    NSLog(@"%@", [actionSheet title]);
     if (buttonIndex == 0)
     {
         [self takePhoto];
