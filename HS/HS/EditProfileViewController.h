@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *currentPicture;
 @property (strong, nonatomic) UIActionSheet *actionRequired;
 @property (strong, nonatomic) UIImagePickerController *imagePicker;
+@property (nonatomic, strong) UIImage *image;
 
 @property (nonatomic, strong) PFUser *currentUser;
 
@@ -29,6 +30,11 @@
 - (IBAction)donePressed:(id)sender;
 - (IBAction)changePasswordPressed:(id)sender;
 - (IBAction)imagePressed:(id)sender;
+
+- (void)takePhoto;
+- (void)getPhoto;
+- (void)uploadImage;
+- (UIImage *)resizeImage:(UIImage *)image toWidth:(float)width andHeight:(float)height;
 
 
 

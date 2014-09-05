@@ -7,6 +7,7 @@
 //
 
 #import "EditProfileViewController.h"
+#import <MobileCoreServices/UTCoreTypes.h>
 
 @interface EditProfileViewController ()
 
@@ -23,9 +24,6 @@
     self.currentUser = [PFUser currentUser];
     self.currentPicture.userInteractionEnabled = YES;
     
-    self.imagePicker = [[UIImagePickerController alloc] init];
-    self.imagePicker.delegate = self;
-    self.imagePicker.allowsEditing = NO;
 
 }
 
@@ -40,7 +38,10 @@
     
     self.currentUsername.text = self.currentUser[@"name"];
     
-    
+    self.imagePicker = [[UIImagePickerController alloc] init];
+    self.imagePicker.delegate = self;
+    self.imagePicker.allowsEditing = NO;
+
 }
 
 
@@ -63,7 +64,7 @@
     
     if (parse_usernameField.length == 0 && parse_phoneField.length == 0)
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"missing informaiton" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"missing informaiton" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alertView show];
         return;
         
@@ -100,7 +101,7 @@
     
     [PFUser requestPasswordResetForEmailInBackground:self.currentUser[@"email"]];
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Request Sent!" message:@"please check your email" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Request Sent!" message:@"please check your email" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
     [alertView show];
     
 }
@@ -122,12 +123,12 @@
     if (buttonIndex == 0)
     {
         [self takePhoto];
-//        [self uploadImage];
+        [self uploadImage];
     }
     else if (buttonIndex == 1)
     {
         [self getPhoto];
-//        [self uploadImage];
+        [self uploadImage];
     }
 
 
@@ -155,6 +156,57 @@
     [self presentViewController:self.imagePicker animated:NO completion:nil];
 }
 
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    
+    if ([mediaType isEqualToString:(NSString *)kUTTypeImage])
+    {
+        self.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+        
+        if (self.imagePicker.sourceType == UIImagePickerControllerSourceTypeCamera)
+        {
+            UIImageWriteToSavedPhotosAlbum(self.image, nil, nil, nil);
+        }
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+
+- (void)uploadImage
+{
+    if (self.image != nil)
+    {
+        UIImage *newImage = [self resizeImage:self.image toWidth:120.0f andHeight:131.0f];
+    }
+    
+    
+    [self viewWillAppear:YES];
+}
+
+
+- (UIImage *)resizeImage:(UIImage *)image toWidth:(float)width andHeight:(float)height
+{
+    CGSize newSize = CGSizeMake(width, height);
+    CGRect newRectangle = CGRectMake(0, 0, width, height);
+    
+    UIGraphicsBeginImageContext(newSize);
+    [self.image drawInRect:newRectangle];
+    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return resizedImage;
+    
+}
+
+
+//- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+//{
+//    [self dismissViewControllerAnimated:NO completion:nil];
+//    
+//    [self.tabBarController setSelectedIndex:3];
+//}
 
 
 @end
